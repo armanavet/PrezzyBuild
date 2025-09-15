@@ -7,30 +7,105 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <style>
-  html, body { margin:0; padding:0; height:100%; }
-  /* Full-viewport container */
-  #unity-container { position:fixed; inset:0; width:100vw; height:100vh; }
-  /* Canvas stretches to container */
-  #unity-canvas { width:100%; height:100%; display:block; background:transparent !important; }
-</style>
+      /* Keep page/canvas transparent so the background layer shows through */
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: transparent !important;
+      }
 
+      /* --- NEW: background layer that sits behind Unity --- */
+      #bg-layer {
+        position: fixed;
+        inset: 0;
+        z-index: -1;               /* <— always behind Unity */
+        overflow: hidden;
+        /* Gradient base */
+        background: linear-gradient(135deg, #0ea5e9 0%, #22d3ee 40%, #a78bfa 100%);
+      }
+      /* Optional: subtle grid pattern on top of the gradient */
+      #bg-layer::before {
+        content: "";
+        position: absolute; inset: 0;
+        background-image:
+          radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+        background-size: 24px 24px;
+        pointer-events: none;
+      }
+      /* Animated circles */
+      .bg-circle {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(10px);
+        opacity: 0.35;
+        animation: float 14s ease-in-out infinite;
+        will-change: transform;
+      }
+      .bg-circle.one  { width: 280px; height: 280px; left: 8%;  top: 18%;  background:#ffffff; }
+      .bg-circle.two  { width: 340px; height: 340px; right:12%; bottom:14%; background:#ffe08a; animation-delay: 4s; }
+      .bg-circle.thr  { width: 220px; height: 220px; left: 65%; top: 10%;  background:#ff8ab6; animation-delay: 8s; }
+
+      @keyframes float {
+        0%,100% { transform: translateY(0px) }
+        50%     { transform: translateY(-40px) }
+      }
+
+      /* Unity container/canvas (from your template) */
+      #unity-container {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        background: transparent !important;
+      }
+      #unity-canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        background: transparent !important;
+      }
+
+      /* (Optional) iframe wrapper you had — left as-is, still hidden */
+      #embed-wrapper {
+        width: 100%;
+        height: 100%;
+        background: transparent !important;
+      }
+      #embed-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: transparent !important;
+      }
+    </style>
   </head>
   <body>
+    <!-- NEW: pretty background that lives behind the Unity canvas -->
+    <div id="bg-layer">
+      <div class="bg-circle one"></div>
+      <div class="bg-circle two"></div>
+      <div class="bg-circle thr"></div>
+    </div>
+
+    <!-- Unity Build (unchanged) -->
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
-     
-      <div id="unity-warning"> </div>
-
+      <div id="unity-warning"></div>
     </div>
+
+    <!-- Optional embed iframe (kept, still hidden by default) -->
+    <div id="embed-wrapper" style="display:none;">
+      <iframe 
+        src="index.html" 
+        allowtransparency="true" 
+        style="background: transparent;">
+      </iframe>
+    </div>
+
     <script>
       var canvas = document.querySelector("#unity-canvas");
 
-      // Shows a temporary message banner/ribbon for a few seconds, or
-      // a permanent error message on top of the canvas if type=='error'.
-      // If type=='warning', a yellow highlight color is used.
-      // Modify or remove this function to customize the visually presented
-      // way that non-critical warnings and error messages are presented to the
-      // user.
       function unityShowBanner(msg, type) {
         var warningBanner = document.querySelector("#unity-warning");
         function updateBannerVisibility() {
@@ -50,7 +125,7 @@
         updateBannerVisibility();
       }
 
-      var buildUrl = "Build";
+      var buildUrl  = "Build";
       var loaderUrl = buildUrl + "/WebGL.loader.js";
       var config = {
         arguments: [],
@@ -61,76 +136,46 @@
         companyName: "MindLabz",
         productName: "WebGltest",
         productVersion: "0.1.0",
-        showBanner: unityShowBanner,
+        showBanner: unityShowBanner
       };
 
-      // By default, Unity keeps WebGL canvas render target size matched with
-      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
-      // Set this to false if you want to decouple this synchronization from
-      // happening inside the engine, and you would instead like to size up
-      // the canvas DOM size and WebGL render target sizes yourself.
-      // config.matchWebGLToCanvasSize = false;
-
-      // If you would like all file writes inside Unity Application.persistentDataPath
-      // directory to automatically persist so that the contents are remembered when
-      // the user revisits the site the next time, uncomment the following line:
-      // config.autoSyncPersistentDataPath = true;
-      // This autosyncing is currently not the default behavior to avoid regressing
-      // existing user projects that might rely on the earlier manual
-      // JS_FileSystem_Sync() behavior, but in future Unity version, this will be
-      // expected to change.
-
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
-
         var meta = document.createElement('meta');
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
         document.querySelector("#unity-container").className = "unity-mobile";
         canvas.className = "unity-mobile";
-
-        // To lower canvas resolution on mobile devices to gain some
-        // performance, uncomment the following line:
-        // config.devicePixelRatio = 1;
-
-
       } else {
-        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
         canvas.style.width  = "100%";
         canvas.style.height = "100%";
       }
 
-      
-
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
+        // same as your current template
         config.webglContextAttributes = {
-      premultipliedAlpha: false,
-      preserveDrawingBuffer: true,
-      powerPreference: 'high-performance'
-    };
-        createUnityInstance(canvas, config, (progress) => {
-          
-              });
-            };
-
+          alpha: true,
+          premultipliedAlpha: false,
+          preserveDrawingBuffer: true,
+          powerPreference: 'high-performance'
+        };
+        createUnityInstance(canvas, config, (progress) => {});
+      };
       document.body.appendChild(script);
 
-
       function resizeCanvasToDisplaySize() {
-    const dpr = window.devicePixelRatio || 1;
-    const w = Math.floor(canvas.clientWidth  * dpr);
-    const h = Math.floor(canvas.clientHeight * dpr);
-    if (canvas.width !== w || canvas.height !== h) {
-      canvas.width  = w;
-      canvas.height = h;
-    }
-  }
-  // Sync once and on every resize
-  window.addEventListener('resize', resizeCanvasToDisplaySize);
-  resizeCanvasToDisplaySize();
+        const dpr = window.devicePixelRatio || 1;
+        const w = Math.floor(canvas.clientWidth  * dpr);
+        const h = Math.floor(canvas.clientHeight * dpr);
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width  = w;
+          canvas.height = h;
+        }
+      }
+      window.addEventListener('resize', resizeCanvasToDisplaySize);
+      resizeCanvasToDisplaySize();
     </script>
   </body>
 </html>
