@@ -56,7 +56,9 @@
         position: fixed;
         inset: 0;
         z-index: 1000;
-        background: linear-gradient(135deg, #0ea5e9 0%, #22d3ee 40%, #a78bfa 100%);
+        background: #000000 !important;
+        background-color: #000000 !important;
+        opacity: 1 !important;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -335,21 +337,25 @@
       const progressBar = document.querySelector('#progress-bar');
       const progressText = document.querySelector('#progress-text');
       
-      // Update loading progress
+      // Update loading progress with faster updates
       function updateLoadingProgress(progress) {
         const percentage = Math.round(progress * 100);
         progressBar.style.width = percentage + '%';
-        progressText.textContent = percentage + '%';
         
-        // Show different messages based on progress
-        if (percentage < 30) {
-          progressText.textContent = 'Initializing... ' + percentage + '%';
-        } else if (percentage < 70) {
-          progressText.textContent = 'Loading assets... ' + percentage + '%';
-        } else if (percentage < 95) {
-          progressText.textContent = 'Almost ready... ' + percentage + '%';
-        } else {
-          progressText.textContent = 'Starting experience... ' + percentage + '%';
+        // Throttle text updates for better performance
+        if (percentage % 5 === 0 || percentage > 95) {
+          progressText.textContent = percentage + '%';
+          
+          // Show different messages based on progress
+          if (percentage < 30) {
+            progressText.textContent = 'Initializing... ' + percentage + '%';
+          } else if (percentage < 70) {
+            progressText.textContent = 'Loading assets... ' + percentage + '%';
+          } else if (percentage < 95) {
+            progressText.textContent = 'Almost ready... ' + percentage + '%';
+          } else {
+            progressText.textContent = 'Starting experience... ' + percentage + '%';
+          }
         }
       }
       
