@@ -234,6 +234,23 @@
         border: none;
         background: transparent !important;
       }
+
+      /* Small banner that shows when tearing completes */
+      #tearing-status {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.75);
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        z-index: 2000;
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -282,6 +299,9 @@
         style="background: transparent;">
       </iframe>
     </div>
+
+    <!-- Hidden banner to be revealed on tearing completion -->
+    <div id="tearing-status">Tearing complete!</div>
 
     <script>
       var canvas = document.querySelector("#unity-canvas");
@@ -404,6 +424,14 @@
       }
       window.addEventListener('resize', resizeCanvasToDisplaySize);
       resizeCanvasToDisplaySize();
+
+      // Listen for Unity-dispatched tearing-complete and show banner
+      window.addEventListener('tearing-complete', function () {
+        var el = document.getElementById('tearing-status');
+        if (el) {
+          el.style.display = 'block';
+        }
+      });
     </script>
   </body>
 </html>
