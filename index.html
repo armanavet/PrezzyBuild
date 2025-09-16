@@ -303,6 +303,9 @@
     <!-- Hidden banner to be revealed on tearing completion -->
     <div id="tearing-status">Tearing complete!</div>
 
+    <!-- Simple image uploader overlay (hidden by default; show via CSS/JS if desired) -->
+    <input id="image-upload" type="file" accept="image/*" style="position:fixed; left:16px; bottom:16px; z-index:2100; opacity:0.9;" />
+
     <script>
       var canvas = document.querySelector("#unity-canvas");
 
@@ -402,6 +405,7 @@
           updateLoadingProgress(progress);
         }).then((unityInstance) => {
           // Unity is fully loaded and ready
+          window.unityInstance = unityInstance;
           console.log('Unity instance created successfully');
           setTimeout(hideLoadingScreen, 500); // Small delay for smooth transition
         }).catch((message) => {
@@ -432,6 +436,34 @@
           el.style.display = 'block';
         }
       });
+
+      // Handle image upload -> read as data URL -> send to Unity
+      (function setupImageUpload(){
+        var input = document.getElementById('image-upload');
+        if (!input) return;
+        input.addEventListener('change', function(ev){
+          var file = ev.target.files && ev.target.files[0];
+          if (!file) return;
+          var reader = new FileReader();
+          reader.onload = function(e){
+            try {
+              var dataUrl = e.target && e.target.result;
+              if (dataUrl) {
+                // Name must match the GameObject holding GlobalController at runtime
+                // If created dynamically, ensure object name is "GlobalController"
+                if (window.unityInstance && typeof window.unityInstance.SendMessage === 'function') {
+                  window.unityInstance.SendMessage('GlobalController', 'ReceiveImageDataURL', String(dataUrl));
+                } else {
+                  console.warn('Unity instance not ready yet. Please try again in a moment.');
+                }
+              }
+            } catch (err) {
+              console.error('Failed to send image to Unity:', err);
+            }
+          };
+          reader.readAsDataURL(file);
+        });
+      })();
     </script>
   </body>
 </html>
