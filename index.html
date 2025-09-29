@@ -284,6 +284,12 @@
 
     <!-- Simple image uploader overlay (hidden by default; show via CSS/JS if desired) -->
     <input id="image-upload" type="file" accept="image/*" style="position:fixed; left:16px; top:16px; z-index:2100; opacity:0.9;" />
+    
+    <!-- Color picker for backface color - positioned top right -->
+    <div id="color-picker-container" style="position:fixed; right:16px; top:16px; z-index:2100; background:rgba(0,0,0,0.7); padding:8px; border-radius:8px; display:flex; align-items:center; gap:8px;">
+      <label for="color-picker" style="color:white; font-size:12px; font-family:system-ui;">Back Color:</label>
+      <input id="color-picker" type="color" value="#ffffff" style="width:40px; height:30px; border:none; border-radius:4px; cursor:pointer;" />
+    </div>
 
     <script>
       var canvas = document.querySelector("#unity-canvas");
@@ -441,6 +447,26 @@
             }
           };
           reader.readAsDataURL(file);
+        });
+      })();
+
+      // Handle color picker -> send color to Unity
+      (function setupColorPicker(){
+        var colorInput = document.getElementById('color-picker');
+        if (!colorInput) return;
+        colorInput.addEventListener('change', function(ev){
+          try {
+            var colorValue = ev.target.value; // Gets hex color like "#ffffff"
+            if (colorValue) {
+              if (window.unityInstance && typeof window.unityInstance.SendMessage === 'function') {
+                window.unityInstance.SendMessage('GlobalController', 'ReceiveColorHex', String(colorValue));
+              } else {
+                console.warn('Unity instance not ready yet. Please try again in a moment.');
+              }
+            }
+          } catch (err) {
+            console.error('Failed to send color to Unity:', err);
+          }
         });
       })();
     </script>
