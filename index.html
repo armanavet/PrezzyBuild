@@ -21,30 +21,16 @@
         inset: 0;
         z-index: -1;               /* <— always behind Unity */
         overflow: hidden;
-        /* Gradient base */
-        background: linear-gradient(135deg, #0ea5e9 0%, #22d3ee 40%, #a78bfa 100%);
+        background-image: url('TemplateData/background.jpg');
+        background-position: center center;   /* center horizontally and vertically */
+        background-repeat: no-repeat;         /* no tiling */
+        background-size: auto 100vh;          /* fit image to viewport height, keep aspect */
+        background-attachment: scroll;        /* better mobile behavior */
       }
-      /* Optional: subtle grid pattern on top of the gradient */
-      #bg-layer::before {
-        content: "";
-        position: absolute; inset: 0;
-        background-image:
-          radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
-        background-size: 24px 24px;
-        pointer-events: none;
-      }
-      /* Animated circles */
-      .bg-circle {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(10px);
-        opacity: 0.35;
-        animation: float 14s ease-in-out infinite;
-        will-change: transform;
-      }
-      .bg-circle.one  { width: 280px; height: 280px; left: 8%;  top: 18%;  background:#ffffff; }
-      .bg-circle.two  { width: 340px; height: 340px; right:12%; bottom:14%; background:#ffe08a; animation-delay: 4s; }
-      .bg-circle.thr  { width: 220px; height: 220px; left: 65%; top: 10%;  background:#ff8ab6; animation-delay: 8s; }
+      /* Disable grid overlay */
+      #bg-layer::before { display: none; }
+      /* Hide decorative circles - using a static background image */
+      .bg-circle { display: none; }
 
       @keyframes float {
         0%,100% { transform: translateY(0px) }
