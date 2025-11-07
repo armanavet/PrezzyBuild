@@ -283,48 +283,8 @@
       <input id="edge-color-picker" type="color" value="#98b3a6" style="width:40px; height:30px; border:none; border-radius:4px; cursor:pointer;" />
     </div>
 
-    <!-- Slider for edge width - positioned below edge color picker -->
-    <div id="edge-width-slider-container" style="position:fixed; right:16px; top:110px; z-index:2100; background:rgba(0,0,0,0.7); padding:8px; border-radius:8px; width:180px;">
-      <div style="display:flex; flex-direction:column; gap:4px;">
-        <label for="edge-width-slider" style="color:white; font-size:12px; font-family:system-ui;">Edge Width: <span id="edge-width-value">15</span>px</label>
-        <input id="edge-width-slider" type="range" min="1" max="100" value="15" step="1" style="width:100%; cursor:pointer;" />
-      </div>
-    </div>
-
-    <!-- Slider for edge gradient strength - positioned below edge width slider -->
-    <div id="edge-gradient-slider-container" style="position:fixed; right:16px; top:170px; z-index:2100; background:rgba(0,0,0,0.7); padding:8px; border-radius:8px; width:180px;">
-      <div style="display:flex; flex-direction:column; gap:4px;">
-        <label for="edge-gradient-slider" style="color:white; font-size:12px; font-family:system-ui;">Gradient: <span id="edge-gradient-value">1.0</span></label>
-        <input id="edge-gradient-slider" type="range" min="0" max="2" value="1" step="0.1" style="width:100%; cursor:pointer;" />
-      </div>
-    </div>
-
-    <!-- Slider for animation speed - positioned below edge gradient slider -->
-    <div id="animation-speed-slider-container" style="position:fixed; right:16px; top:230px; z-index:2100; background:rgba(0,0,0,0.7); padding:8px; border-radius:8px; width:180px;">
-      <div style="display:flex; flex-direction:column; gap:4px;">
-        <label for="animation-speed-slider" style="color:white; font-size:12px; font-family:system-ui;">Anim Speed: <span id="animation-speed-value">10</span></label>
-        <input id="animation-speed-slider" type="range" min="1" max="10" value="3" step="0.1" style="width:100%; cursor:pointer;" />
-      </div>
-    </div>
-
-    <!-- Slider for edge band px - positioned below animation speed slider -->
-    <div id="edge-band-slider-container" style="position:fixed; right:16px; top:290px; z-index:2100; background:rgba(0,0,0,0.7); padding:8px; border-radius:8px; width:180px;">
-      <div style="display:flex; flex-direction:column; gap:4px;">
-        <label for="edge-band-slider" style="color:white; font-size:12px; font-family:system-ui;">Edge Band: <span id="edge-band-value">1.0</span></label>
-        <input id="edge-band-slider" type="range" min="0.5" max="10" value="1.5" step="0.1" style="width:100%; cursor:pointer;" />
-      </div>
-    </div>
-
-    <!-- Slider for macro amount (noise strength) - positioned below edge band slider -->
-    <div id="noise-strength-slider-container" style="position:fixed; right:16px; top:350px; z-index:2100; background:rgba(0,0,0,0.7); padding:8px; border-radius:8px; width:180px;">
-      <div style="display:flex; flex-direction:column; gap:4px;">
-        <label for="noise-strength-slider" style="color:white; font-size:12px; font-family:system-ui;">Noise Strength: <span id="noise-strength-value">0.035</span></label>
-        <input id="noise-strength-slider" type="range" min="0" max="1.2" value="0.035" step="0.01" style="width:100%; cursor:pointer;" />
-      </div>
-    </div>
-
-    <!-- Input for max tears - positioned below noise strength slider -->
-    <div id="max-tears-input-container" style="position:fixed; right:16px; top:410px; z-index:2100; background:rgba(0,0,0,0.7); padding:8px; border-radius:8px; width:180px;">
+    <!-- Input for max tears - positioned below edge color picker -->
+    <div id="max-tears-input-container" style="position:fixed; right:16px; top:110px; z-index:2100; background:rgba(0,0,0,0.7); padding:8px; border-radius:8px; width:180px;">
       <div style="display:flex; flex-direction:column; gap:4px;">
         <label for="max-tears-input" style="color:white; font-size:12px; font-family:system-ui;">Max Tears:</label>
         <input id="max-tears-input" type="number" min="1" max="20" value="6" style="width:100%; padding:4px; border:1px solid #333; border-radius:4px; background:#222; color:white; font-size:12px;" />
@@ -332,26 +292,10 @@
     </div>
 
     <!-- Slider for progress percentage threshold - positioned below max tears input -->
-    <div id="progress-threshold-slider-container" style="position:fixed; right:16px; top:460px; z-index:2100; background:rgba(0,0,0,0.7); padding:8px; border-radius:8px; width:180px;">
+    <div id="progress-threshold-slider-container" style="position:fixed; right:16px; top:160px; z-index:2100; background:rgba(0,0,0,0.7); padding:8px; border-radius:8px; width:180px;">
       <div style="display:flex; flex-direction:column; gap:4px;">
         <label for="progress-threshold-slider" style="color:white; font-size:12px; font-family:system-ui;">Progress: <span id="progress-threshold-value">80</span>%</label>
         <input id="progress-threshold-slider" type="range" min="0" max="100" value="80" step="1" style="width:100%; cursor:pointer;" />
-      </div>
-    </div>
-
-    <!-- Slider for brush size min - positioned below progress threshold slider -->
-    <div id="brush-size-min-slider-container" style="position:fixed; right:16px; top:520px; z-index:2100; background:rgba(0,0,0,0.7); padding:8px; border-radius:8px; width:180px;">
-      <div style="display:flex; flex-direction:column; gap:4px;">
-        <label for="brush-size-min-slider" style="color:white; font-size:12px; font-family:system-ui;">Brush Min: <span id="brush-size-min-value">0.03</span></label>
-        <input id="brush-size-min-slider" type="range" min="0.001" max="0.25" value="0.05" step="0.001" style="width:100%; cursor:pointer;" />
-      </div>
-    </div>
-
-    <!-- Slider for brush size max - positioned below brush size min slider -->
-    <div id="brush-size-max-slider-container" style="position:fixed; right:16px; top:580px; z-index:2100; background:rgba(0,0,0,0.7); padding:8px; border-radius:8px; width:180px;">
-      <div style="display:flex; flex-direction:column; gap:4px;">
-        <label for="brush-size-max-slider" style="color:white; font-size:12px; font-family:system-ui;">Brush Max: <span id="brush-size-max-value">0.13</span></label>
-        <input id="brush-size-max-slider" type="range" min="0.001" max="0.25" value="0.15" step="0.001" style="width:100%; cursor:pointer;" />
       </div>
     </div>
 
@@ -505,10 +449,9 @@
             try {
               var dataUrl = e.target && e.target.result;
               if (dataUrl) {
-                // Name must match the GameObject holding GlobalController at runtime
-                // If created dynamically, ensure object name is "GlobalController"
+                // Name must match the GameObject holding PaperManager at runtime
                 if (window.unityInstance && typeof window.unityInstance.SendMessage === 'function') {
-                  window.unityInstance.SendMessage('GlobalController', 'ReceiveImageDataURL', String(dataUrl));
+                  window.unityInstance.SendMessage('PaperManager', 'ReceiveImageDataURL', String(dataUrl));
                 } else {
                   console.warn('Unity instance not ready yet. Please try again in a moment.');
                 }
@@ -530,7 +473,7 @@
             var colorValue = ev.target.value; // Gets hex color like "#ffffff"
             if (colorValue) {
               if (window.unityInstance && typeof window.unityInstance.SendMessage === 'function') {
-                window.unityInstance.SendMessage('GlobalController', 'ReceiveColorHex', String(colorValue));
+                window.unityInstance.SendMessage('PaperManager', 'ReceiveColorHex', String(colorValue));
               } else {
                 console.warn('Unity instance not ready yet. Please try again in a moment.');
               }
@@ -550,143 +493,13 @@
             var colorValue = ev.target.value; // Gets hex color like "#98b3a6"
             if (colorValue) {
               if (window.unityInstance && typeof window.unityInstance.SendMessage === 'function') {
-                window.unityInstance.SendMessage('GlobalController', 'ReceiveEdgeColorHex', String(colorValue));
+                window.unityInstance.SendMessage('PaperManager', 'ReceiveEdgeColorHex', String(colorValue));
               } else {
                 console.warn('Unity instance not ready yet. Please try again in a moment.');
               }
             }
           } catch (err) {
             console.error('Failed to send edge color to Unity:', err);
-          }
-        });
-      })();
-
-      // Handle edge width slider -> send edge width to Unity
-      (function setupEdgeWidthSlider(){
-        var edgeWidthSlider = document.getElementById('edge-width-slider');
-        var edgeWidthValue = document.getElementById('edge-width-value');
-        if (!edgeWidthSlider || !edgeWidthValue) return;
-        
-        // Update display on input
-        edgeWidthSlider.addEventListener('input', function(ev){
-          edgeWidthValue.textContent = ev.target.value;
-        });
-        
-        // Send to Unity on change
-        edgeWidthSlider.addEventListener('change', function(ev){
-          try {
-            var value = ev.target.value;
-            if (window.unityInstance && typeof window.unityInstance.SendMessage === 'function') {
-              window.unityInstance.SendMessage('GlobalController', 'ReceiveEdgeWidth', String(value));
-            } else {
-              console.warn('Unity instance not ready yet. Please try again in a moment.');
-            }
-          } catch (err) {
-            console.error('Failed to send edge width to Unity:', err);
-          }
-        });
-      })();
-
-      // Handle edge gradient strength slider -> send edge gradient strength to Unity
-      (function setupEdgeGradientSlider(){
-        var edgeGradientSlider = document.getElementById('edge-gradient-slider');
-        var edgeGradientValue = document.getElementById('edge-gradient-value');
-        if (!edgeGradientSlider || !edgeGradientValue) return;
-        
-        // Update display on input
-        edgeGradientSlider.addEventListener('input', function(ev){
-          edgeGradientValue.textContent = parseFloat(ev.target.value).toFixed(1);
-        });
-        
-        // Send to Unity on change
-        edgeGradientSlider.addEventListener('change', function(ev){
-          try {
-            var value = ev.target.value;
-            if (window.unityInstance && typeof window.unityInstance.SendMessage === 'function') {
-              window.unityInstance.SendMessage('GlobalController', 'ReceiveEdgeGradientStrength', String(value));
-            } else {
-              console.warn('Unity instance not ready yet. Please try again in a moment.');
-            }
-          } catch (err) {
-            console.error('Failed to send edge gradient strength to Unity:', err);
-          }
-        });
-      })();
-
-      // Handle animation speed slider -> send animation speed to Unity
-      (function setupAnimationSpeedSlider(){
-        var animationSpeedSlider = document.getElementById('animation-speed-slider');
-        var animationSpeedValue = document.getElementById('animation-speed-value');
-        if (!animationSpeedSlider || !animationSpeedValue) return;
-        
-        // Update display on input
-        animationSpeedSlider.addEventListener('input', function(ev){
-          animationSpeedValue.textContent = parseFloat(ev.target.value).toFixed(1);
-        });
-        
-        // Send to Unity on change
-        animationSpeedSlider.addEventListener('change', function(ev){
-          try {
-            var value = ev.target.value;
-            if (window.unityInstance && typeof window.unityInstance.SendMessage === 'function') {
-              window.unityInstance.SendMessage('GlobalController', 'ReceiveAnimationSpeed', String(value));
-            } else {
-              console.warn('Unity instance not ready yet. Please try again in a moment.');
-            }
-          } catch (err) {
-            console.error('Failed to send animation speed to Unity:', err);
-          }
-        });
-      })();
-
-      // Handle edge band slider -> send edge band px to Unity
-      (function setupEdgeBandSlider(){
-        var edgeBandSlider = document.getElementById('edge-band-slider');
-        var edgeBandValue = document.getElementById('edge-band-value');
-        if (!edgeBandSlider || !edgeBandValue) return;
-        
-        // Update display on input
-        edgeBandSlider.addEventListener('input', function(ev){
-          edgeBandValue.textContent = parseFloat(ev.target.value).toFixed(1);
-        });
-        
-        // Send to Unity on change
-        edgeBandSlider.addEventListener('change', function(ev){
-          try {
-            var value = ev.target.value;
-            if (window.unityInstance && typeof window.unityInstance.SendMessage === 'function') {
-              window.unityInstance.SendMessage('GlobalController', 'ReceiveEdgeBandPx', String(value));
-            } else {
-              console.warn('Unity instance not ready yet. Please try again in a moment.');
-            }
-          } catch (err) {
-            console.error('Failed to send edge band px to Unity:', err);
-          }
-        });
-      })();
-
-      // Handle noise strength slider -> send macro amount to Unity
-      (function setupNoiseStrengthSlider(){
-        var noiseStrengthSlider = document.getElementById('noise-strength-slider');
-        var noiseStrengthValue = document.getElementById('noise-strength-value');
-        if (!noiseStrengthSlider || !noiseStrengthValue) return;
-        
-        // Update display on input
-        noiseStrengthSlider.addEventListener('input', function(ev){
-          noiseStrengthValue.textContent = parseFloat(ev.target.value).toFixed(2);
-        });
-        
-        // Send to Unity on change
-        noiseStrengthSlider.addEventListener('change', function(ev){
-          try {
-            var value = ev.target.value;
-            if (window.unityInstance && typeof window.unityInstance.SendMessage === 'function') {
-              window.unityInstance.SendMessage('GlobalController', 'ReceiveMacroAmount', String(value));
-            } else {
-              console.warn('Unity instance not ready yet. Please try again in a moment.');
-            }
-          } catch (err) {
-            console.error('Failed to send noise strength to Unity:', err);
           }
         });
       })();
@@ -737,58 +550,6 @@
         });
       })();
 
-      // Handle brush size min slider -> send brush size min to Unity
-      (function setupBrushSizeMinSlider(){
-        var brushSizeMinSlider = document.getElementById('brush-size-min-slider');
-        var brushSizeMinValue = document.getElementById('brush-size-min-value');
-        if (!brushSizeMinSlider || !brushSizeMinValue) return;
-        
-        // Update display on input
-        brushSizeMinSlider.addEventListener('input', function(ev){
-          brushSizeMinValue.textContent = parseFloat(ev.target.value).toFixed(3);
-        });
-        
-        // Send to Unity on change
-        brushSizeMinSlider.addEventListener('change', function(ev){
-          try {
-            var value = ev.target.value;
-            if (window.unityInstance && typeof window.unityInstance.SendMessage === 'function') {
-              window.unityInstance.SendMessage('GlobalController', 'ReceiveBrushSizeMin', String(value));
-            } else {
-              console.warn('Unity instance not ready yet. Please try again in a moment.');
-            }
-          } catch (err) {
-            console.error('Failed to send brush size min to Unity:', err);
-          }
-        });
-      })();
-
-      // Handle brush size max slider -> send brush size max to Unity
-      (function setupBrushSizeMaxSlider(){
-        var brushSizeMaxSlider = document.getElementById('brush-size-max-slider');
-        var brushSizeMaxValue = document.getElementById('brush-size-max-value');
-        if (!brushSizeMaxSlider || !brushSizeMaxValue) return;
-        
-        // Update display on input
-        brushSizeMaxSlider.addEventListener('input', function(ev){
-          brushSizeMaxValue.textContent = parseFloat(ev.target.value).toFixed(3);
-        });
-        
-        // Send to Unity on change
-        brushSizeMaxSlider.addEventListener('change', function(ev){
-          try {
-            var value = ev.target.value;
-            if (window.unityInstance && typeof window.unityInstance.SendMessage === 'function') {
-              window.unityInstance.SendMessage('GlobalController', 'ReceiveBrushSizeMax', String(value));
-            } else {
-              console.warn('Unity instance not ready yet. Please try again in a moment.');
-            }
-          } catch (err) {
-            console.error('Failed to send brush size max to Unity:', err);
-          }
-        });
-      })();
-
       // Check URL query parameter to show/hide overlay controls
       (function setupOverlayVisibility(){
         const urlParams = new URLSearchParams(window.location.search);
@@ -799,28 +560,14 @@
           const imageUpload = document.getElementById('image-upload');
           const colorPickerContainer = document.getElementById('color-picker-container');
           const edgeColorPickerContainer = document.getElementById('edge-color-picker-container');
-          const edgeWidthSliderContainer = document.getElementById('edge-width-slider-container');
-          const edgeGradientSliderContainer = document.getElementById('edge-gradient-slider-container');
-          const animationSpeedSliderContainer = document.getElementById('animation-speed-slider-container');
-          const edgeBandSliderContainer = document.getElementById('edge-band-slider-container');
-          const noiseStrengthSliderContainer = document.getElementById('noise-strength-slider-container');
           const maxTearsInputContainer = document.getElementById('max-tears-input-container');
           const progressThresholdSliderContainer = document.getElementById('progress-threshold-slider-container');
-          const brushSizeMinSliderContainer = document.getElementById('brush-size-min-slider-container');
-          const brushSizeMaxSliderContainer = document.getElementById('brush-size-max-slider-container');
           
           if (imageUpload) imageUpload.style.display = 'none';
           if (colorPickerContainer) colorPickerContainer.style.display = 'none';
           if (edgeColorPickerContainer) edgeColorPickerContainer.style.display = 'none';
-          if (edgeWidthSliderContainer) edgeWidthSliderContainer.style.display = 'none';
-          if (edgeGradientSliderContainer) edgeGradientSliderContainer.style.display = 'none';
-          if (animationSpeedSliderContainer) animationSpeedSliderContainer.style.display = 'none';
-          if (edgeBandSliderContainer) edgeBandSliderContainer.style.display = 'none';
-          if (noiseStrengthSliderContainer) noiseStrengthSliderContainer.style.display = 'none';
           if (maxTearsInputContainer) maxTearsInputContainer.style.display = 'none';
           if (progressThresholdSliderContainer) progressThresholdSliderContainer.style.display = 'none';
-          if (brushSizeMinSliderContainer) brushSizeMinSliderContainer.style.display = 'none';
-          if (brushSizeMaxSliderContainer) brushSizeMaxSliderContainer.style.display = 'none';
           
           console.log('Overlay controls hidden by default. Add ?overlay=true to URL to enable.');
         } else {
